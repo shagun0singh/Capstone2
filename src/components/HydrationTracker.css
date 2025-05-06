@@ -1,0 +1,193 @@
+.hydration-tracker {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tracker-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.tracker-header h1 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.time-greeting {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+.progress-section {
+  margin-bottom: 2rem;
+}
+
+.progress-container {
+  margin: 2rem 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 24px;
+  background-color: #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #3498db;
+  transition: width 0.3s ease-in-out;
+}
+
+.progress-text {
+  text-align: center;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.quick-add {
+  margin: 2rem 0;
+}
+
+.quick-add h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.add-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.add-buttons button {
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #3498db;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-buttons button:hover {
+  background-color: #2980b9;
+}
+
+.reset-btn {
+  background-color: #e74c3c !important;
+}
+
+.reset-btn:hover {
+  background-color: #c0392b !important;
+}
+
+.goal-section {
+  margin: 2rem 0;
+}
+
+.goal-section h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.goal-setter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.goal-setter label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #2c3e50;
+}
+
+.goal-setter input {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100px;
+}
+
+.history-section {
+  margin: 2rem 0;
+}
+
+.history-section h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.history-list {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem;
+  border-bottom: 1px solid #eee;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.amount {
+  color: #2ecc71;
+  font-weight: 500;
+}
+
+.time {
+  color: #7f8c8d;
+}
+
+.no-history {
+  text-align: center;
+  color: #7f8c8d;
+  padding: 1rem;
+}
+
+.weekly-progress {
+  margin: 2rem 0;
+}
+
+.weekly-progress h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.chart-container {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .hydration-tracker {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .add-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .goal-setter {
+    flex-direction: column;
+  }
+} 
