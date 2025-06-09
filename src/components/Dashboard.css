@@ -1,7 +1,7 @@
 .dashboard-container {
-  max-width: 1000px;
-  margin: 0 auto;
   padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .dashboard-header {
@@ -10,14 +10,21 @@
 }
 
 .dashboard-header h1 {
-  color: #2c3e50;
   font-size: 2.5rem;
+  color: #333;
   margin-bottom: 0.5rem;
 }
 
 .dashboard-header p {
-  color: #7f8c8d;
+  color: #666;
   font-size: 1.2rem;
+}
+
+.dashboard-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
 }
 
 .dashboard-grid {
@@ -119,40 +126,57 @@
 }
 
 .quick-actions {
-  display: flex;
-  flex-direction: column;
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+.quick-actions h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
 }
 
 .action-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  justify-content: center;
 }
 
 .action-btn {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
+  gap: 0.8rem;
   background: #f8f9fa;
-  color: #2c3e50;
+  color: #333;
+  padding: 1.5rem;
+  border-radius: 12px;
   text-decoration: none;
-  padding: 1.25rem;
-  border-radius: 10px;
-  transition: all 0.2s ease;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 2px solid #e9ecef;
 }
 
 .action-btn:hover {
   background: #e9ecef;
-  transform: translateX(5px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .action-icon {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .action-text {
   font-size: 1.1rem;
-  font-weight: 500;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
