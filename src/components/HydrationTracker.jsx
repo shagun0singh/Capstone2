@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { getHydrationData, updateWaterIntake, resetDailyIntake } from '../utils/hydrationData';
-import HydrationReminder from './HydrationReminder';
 import './HydrationTracker.css';
 
 const HydrationTracker = () => {
@@ -99,8 +98,6 @@ const HydrationTracker = () => {
         </div>
         <button onClick={resetIntake} className="reset-btn">Reset Today's Intake</button>
       </div>
-
-      <HydrationReminder />
     </div>
   );
 };
