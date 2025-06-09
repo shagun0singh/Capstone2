@@ -30,6 +30,12 @@ const Navigation = () => {
           Today's Progress
         </Link>
         <Link 
+          to="/reminder" 
+          className={`nav-link ${isActive('/reminder') ? 'active' : ''}`}
+        >
+          Reminder
+        </Link>
+        <Link 
           to="/hydration" 
           className={`nav-link ${isActive('/hydration') ? 'active' : ''}`}
         >

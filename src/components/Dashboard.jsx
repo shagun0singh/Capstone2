@@ -18,6 +18,10 @@ const Dashboard = () => {
               <span className="action-icon">📊</span>
               <span className="action-text">Today's Progress</span>
             </Link>
+            <Link to="/reminder" className="action-btn">
+              <span className="action-icon">⏰</span>
+              <span className="action-text">Reminder</span>
+            </Link>
             <Link to="/hydration" className="action-btn">
               <span className="action-icon">💧</span>
               <span className="action-text">Track Water</span>
