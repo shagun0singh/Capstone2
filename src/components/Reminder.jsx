@@ -5,7 +5,19 @@ const Reminder = () => {
   const [reminders, setReminders] = useState([]);
   const [interval, setInterval] = useState(60);
   const [isActive, setIsActive] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(60 * 60); // in seconds
 
+  // Always use a valid interval for display and logic
+  const validInterval = Number(interval) > 0 ? Number(interval) : 60;
+
+  // Set timeLeft only when reminders are started
+  useEffect(() => {
+    if (isActive) {
+      setTimeLeft(validInterval * 60);
+    }
+  }, [isActive]);
+
+  // Notification timer
   useEffect(() => {
     let timer;
     if (isActive) {
@@ -20,10 +32,33 @@ const Reminder = () => {
             Notification.requestPermission();
           }
         }
-      }, interval * 60 * 1000);
+        setTimeLeft(validInterval * 60); // reset countdown after notification
+      }, validInterval * 60 * 1000);
     }
     return () => clearInterval(timer);
-  }, [isActive, interval]);
+  }, [isActive, validInterval]);
+
+  // Countdown timer
+  useEffect(() => {
+    let countdown;
+    if (isActive) {
+      countdown = setInterval(() => {
+        setTimeLeft((prev) => {
+          if (prev > 0) return prev - 1;
+          // When timer hits zero, reset to validInterval * 60
+          return validInterval * 60;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(countdown);
+  }, [isActive, validInterval]);
+
+  // Format time left as 'X min Y secs'
+  const formatTimeLeft = (seconds) => {
+    const min = Math.floor(seconds / 60);
+    const sec = seconds % 60;
+    return `${min} min ${sec < 10 ? '0' : ''}${sec} secs`;
+  };
 
   const handleStartReminders = () => {
     setIsActive(true);
@@ -31,6 +66,12 @@ const Reminder = () => {
 
   const handleStopReminders = () => {
     setIsActive(false);
+    setTimeLeft(validInterval * 60);
+  };
+
+  const handleIntervalChange = (e) => {
+    const value = Number(e.target.value);
+    setInterval(value > 0 ? value : '');
   };
 
   return (
@@ -47,7 +88,7 @@ const Reminder = () => {
               <input
                 type="number"
                 value={interval}
-                onChange={(e) => setInterval(Number(e.target.value))}
+                onChange={handleIntervalChange}
                 min="15"
                 max="180"
                 disabled={isActive}
@@ -57,7 +98,7 @@ const Reminder = () => {
           <div className="reminder-buttons">
             {!isActive ? (
               <button onClick={handleStartReminders} className="start-btn">
-                Start Reminders
+                Start Reminder
               </button>
             ) : (
               <button onClick={handleStopReminders} className="stop-btn">
@@ -68,7 +109,12 @@ const Reminder = () => {
         </div>
         <div className="reminder-status">
           {isActive ? (
-            <p className="active-status">Reminders active every {interval} minutes</p>
+            <>
+              <p className="active-status">
+                Reminders active every {validInterval} minutes<br />
+                Next reminder in {formatTimeLeft(timeLeft)}
+              </p>
+            </>
           ) : (
             <p className="inactive-status">Reminders are currently inactive</p>
           )}

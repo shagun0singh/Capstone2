@@ -8,6 +8,10 @@ import TodayProgress from './components/TodayProgress'
 import Reminder from './components/Reminder'
 import { initializeData } from './utils/hydrationData'
 import './App.css'
+import Login from './components/Login'
+import Signup from './components/Signup'
+import PrivateRoute from './components/PrivateRoute'
+import { AuthProvider } from './contexts/AuthContext'
 //ggg
 
 
@@ -17,18 +21,22 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="app">
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/today" element={<TodayProgress />} />
-          <Route path="/reminder" element={<Reminder />} />
-          <Route path="/hydration" element={<HydrationTracker />} />
-          <Route path="/profile" element={<Profile />} />
-        </Routes>
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className="app">
+          <Navigation />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+            <Route path="/today" element={<PrivateRoute><TodayProgress /></PrivateRoute>} />
+            <Route path="/reminder" element={<PrivateRoute><Reminder /></PrivateRoute>} />
+            <Route path="/hydration" element={<PrivateRoute><HydrationTracker /></PrivateRoute>} />
+            <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
   )
 }
 

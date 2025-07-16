@@ -39,12 +39,12 @@
   border: 1px solid var(--border-color);
   position: relative;
   overflow: hidden;
-  animation: fadeInUp 1s ease-out 0.2s both;
-  flex: 1;
+  min-height: 70vh;
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 70vh;
 }
 
 .reminder-content::before {
@@ -59,15 +59,30 @@
 }
 
 .reminder-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
   margin-bottom: 3rem;
 }
 
 .interval-selector {
-  margin-bottom: 3rem;
+  margin-bottom: 0;
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.interval-selector label,
+.interval-selector input {
+  display: block;
+  text-align: center;
 }
 
 .interval-selector label {
-  display: block;
   margin-bottom: 1rem;
   font-weight: 600;
   color: var(--text-primary);
@@ -100,8 +115,10 @@
 .reminder-buttons {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 0;
+  width: 100%;
 }
 
 .start-btn, .stop-btn {
@@ -220,8 +237,12 @@
     min-height: 60vh;
   }
 
+  .reminder-controls {
+    gap: 1rem;
+  }
   .reminder-buttons {
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
   }
 
