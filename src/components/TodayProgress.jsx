@@ -4,22 +4,28 @@ import { getHydrationData } from '../utils/hydrationData';
 import './TodayProgress.css';
 
 const TodayProgress = () => {
-  const [todayStats, setTodayStats] = useState({
-    current: 0,
-    goal: 2000
-  });
+  const [todayData, setTodayData] = useState({ total: 0, goal: 2000 });
+  const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
-    const data = getHydrationData();
-    if (data) {
-      setTodayStats({
-        current: data.todayIntake || 0,
-        goal: data.userData?.dailyGoal || 2000
-      });
-    }
+    const loadTodayData = () => {
+      const data = getHydrationData();
+      const total = data.todayIntake;
+      const goal = data.goal;
+      const percent = Math.min((total / goal) * 100, 100);
+      setTodayData({ total, goal });
+      setPercentage(percent);
+    };
+
+    loadTodayData();
+    // Reload data every minute
+    const interval = setInterval(loadTodayData, 60000);
+    return () => clearInterval(interval);
   }, []);
 
-  const progressPercentage = Math.round((todayStats.current / todayStats.goal) * 100);
+  const formatAmount = (amount) => {
+    return `${amount}ml`;
+  };
 
   return (
     <div className="today-progress-container">
@@ -30,23 +36,27 @@ const TodayProgress = () => {
       
       <div className="progress-content">
         <div className="progress-circle">
-          <div className="progress-value">
-            {progressPercentage}%
-          </div>
-          <div className="progress-label">Complete</div>
+          <div className="progress-value">{formatAmount(todayData.total)}</div>
+          <div className="progress-label">of {formatAmount(todayData.goal)}</div>
         </div>
+        
         <div className="progress-details">
           <div className="progress-stats">
             <div className="stat">
-              <span className="stat-value">{todayStats.current}ml</span>
-              <span className="stat-label">Current</span>
+              <span className="stat-value">{Math.round(percentage)}%</span>
+              <span className="stat-label">Goal Progress</span>
             </div>
             <div className="stat">
-              <span className="stat-value">{todayStats.goal}ml</span>
-              <span className="stat-label">Goal</span>
+              <span className="stat-value">{todayData.total > 0 ? Math.round(todayData.total / 250) : 0}</span>
+              <span className="stat-label">Glasses (250ml)</span>
+            </div>
+            <div className="stat">
+              <span className="stat-value">{Math.max(0, todayData.goal - todayData.total)}ml</span>
+              <span className="stat-label">Remaining</span>
             </div>
           </div>
         </div>
+        
         <Link to="/hydration" className="track-btn">
           <span className="btn-icon">💧</span>
           Track Water Intake

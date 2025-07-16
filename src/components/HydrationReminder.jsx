@@ -37,8 +37,12 @@ const HydrationReminder = ({ onReminderSet }) => {
   };
 
   return (
-    <div className="reminder-container">
-      <h3>Hydration Reminders</h3>
+    <div className="hydration-reminder">
+      <div className="reminder-header">
+        <div className="reminder-icon">💧</div>
+        <h3 className="reminder-title">Hydration Reminders</h3>
+      </div>
+      <p className="reminder-description">Set up notifications to remind you to stay hydrated throughout the day.</p>
       <div className="reminder-controls">
         <div className="interval-selector">
           <label>
@@ -67,9 +71,15 @@ const HydrationReminder = ({ onReminderSet }) => {
       </div>
       <div className="reminder-status">
         {isActive ? (
-          <p className="active-status">Reminders active every {interval} minutes</p>
+          <p className="active-status">
+            <span className="status-icon">✅</span>
+            Reminders active every {interval} minutes
+          </p>
         ) : (
-          <p className="inactive-status">Reminders are currently inactive</p>
+          <p className="inactive-status">
+            <span className="status-icon">⏸️</span>
+            Reminders are currently inactive
+          </p>
         )}
       </div>
     </div>
