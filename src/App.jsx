@@ -6,13 +6,14 @@ import HydrationTracker from './components/HydrationTracker'
 import Profile from './components/Profile'
 import TodayProgress from './components/TodayProgress'
 import Reminder from './components/Reminder'
+import CompleteProfile from './components/CompleteProfile';
 import { initializeData } from './utils/hydrationData'
 import './App.css'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import PrivateRoute from './components/PrivateRoute'
 import { AuthProvider } from './contexts/AuthContext'
-//ggg
+
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/complete-profile" element={<CompleteProfile />} />
             <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
             <Route path="/today" element={<PrivateRoute><TodayProgress /></PrivateRoute>} />
             <Route path="/reminder" element={<PrivateRoute><Reminder /></PrivateRoute>} />

@@ -12,7 +12,7 @@
   flex-direction: column;
 }
 
-/* Remove old styles */
+
 .logo {
   display: none;
 }
@@ -25,7 +25,7 @@
   display: none;
 }
 
-/* Ensure proper layout */
+
 .app > * {
   flex: 1;
   display: flex;

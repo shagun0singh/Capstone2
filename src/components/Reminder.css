@@ -209,7 +209,7 @@
   font-size: 1.2rem;
 }
 
-/* Animations */
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -221,7 +221,7 @@
   }
 }
 
-/* Responsive design */
+
 @media (max-width: 768px) {
   .reminder-container {
     padding: 1rem;
@@ -266,7 +266,6 @@
   }
 }
 
-/* Focus states for accessibility */
 .start-btn:focus,
 .stop-btn:focus,
 .interval-selector input:focus {
@@ -274,13 +273,12 @@
   outline-offset: 2px;
 }
 
-/* Loading state */
+
 .reminder-container.loading {
   opacity: 0.7;
   pointer-events: none;
 }
 
-/* Success animation */
 .start-btn.success,
 .stop-btn.success {
   animation: successPulse 0.6s ease-out;

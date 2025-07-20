@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
-import '../components/Reminder.css'; // Reuse themed styles
+import '../components/Reminder.css'; 
 
 export default function Login() {
   const emailRef = useRef();
@@ -17,7 +17,12 @@ export default function Login() {
     setLoading(true);
     try {
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate('/');
+      const detailsExist = false; 
+      if (!detailsExist) {
+        navigate('/complete-profile');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (err) {
       setError(err.message);
     }

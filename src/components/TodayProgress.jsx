@@ -18,7 +18,6 @@ const TodayProgress = () => {
     };
 
     loadTodayData();
-    // Reload data every minute
     const interval = setInterval(loadTodayData, 60000);
     return () => clearInterval(interval);
   }, []);

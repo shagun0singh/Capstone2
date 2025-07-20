@@ -194,11 +194,15 @@
   text-decoration: none;
 }
 
+.track-btn, .track-btn:visited, .track-btn:hover, .track-btn:active, .track-btn:focus {
+  text-decoration: none !important;
+}
+
 .btn-icon {
   font-size: 1.2rem;
 }
 
-/* Animations */
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -210,7 +214,7 @@
   }
 }
 
-/* Responsive design */
+
 @media (max-width: 768px) {
   .today-progress-container {
     padding: 1rem;
@@ -277,7 +281,7 @@
   }
 }
 
-/* Focus states for accessibility */
+
 .track-btn:focus {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;

@@ -48,10 +48,9 @@ html {
 }
 
 body {
-  background: #000000;
-  color: var(--text);
-  font-family: var(--font-family);
-  min-height: 100vh;
+  background: url('/dashboard-bg.png') no-repeat right -72px bottom -30px fixed;
+  background-size: 400px auto;
+  background-blend-mode: lighten;
 }
 
 #root {
@@ -88,16 +87,12 @@ p {
 }
 
 /* Links */
-a {
-  font-weight: 500;
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: var(--transition);
+a, a:visited, a:hover, a:active, a:focus {
+  text-decoration: none !important;
 }
 
 a:hover {
   color: var(--secondary-color);
-  text-decoration: underline;
 }
 
 /* Buttons */

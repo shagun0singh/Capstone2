@@ -32,11 +32,11 @@
 }
 
 .profile-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
-  animation: fadeInUp 1s ease-out 0.2s both;
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  align-items: center;
 }
 
 .profile-card {
@@ -70,6 +70,8 @@
   margin-bottom: 2rem;
   font-weight: 700;
   position: relative;
+  border-bottom: none;
+  position: static;
 }
 
 .profile-card h2::after {
@@ -81,6 +83,36 @@
   height: 3px;
   background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
   border-radius: 2px;
+  display: none;
+}
+
+.profile-card.profile-header {
+  min-height: unset;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.profile-name-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.profile-name {
+  margin-left: 0;
+}
+
+.profile-card.profile-header h2 {
+  text-align: left;
+  border-bottom: none;
+  position: static;
+}
+
+.profile-card.profile-header h2::after {
+  display: none;
 }
 
 .info-form {
@@ -349,20 +381,18 @@
   }
 }
 
-/* Focus states for accessibility */
 .save-btn:focus,
 .form-input:focus {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
 
-/* Loading state */
+
 .profile-container.loading {
   opacity: 0.7;
   pointer-events: none;
 }
 
-/* Success animation */
 .save-btn.success {
   animation: successPulse 0.6s ease-out;
 }
@@ -371,4 +401,61 @@
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
+} 
+
+.modal-content {
+  background: var(--background-card, #18191a);
+  padding: 2rem;
+  border-radius: 10px;
+  min-width: 400px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+  color: var(--text-color, #fff);
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+} 
+
+.modal-content .info-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.modal-content .modal-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 2rem;
+}
+
+.modal-content .modal-buttons button {
+  flex: 0 0 160px;
+  width: 160px;
+  min-width: 120px;
+  max-width: 200px;
+  padding: 1rem 0;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: none;
+  box-shadow: none;
+} 
+
+.modal-content .modal-buttons .close-btn {
+  margin-top: 2rem;
 } 

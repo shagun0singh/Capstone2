@@ -87,6 +87,11 @@
   letter-spacing: -0.02em;
 }
 
+nav a, nav a:visited, nav a:hover, nav a:active, nav a:focus,
+.hydration-logo-text, .hydration-logo-text:visited, .hydration-logo-text:hover, .hydration-logo-text:active, .hydration-logo-text:focus {
+  text-decoration: none !important;
+}
+
 @media (max-width: 768px) {
   .main-nav {
     padding: 1rem;

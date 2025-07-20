@@ -312,14 +312,12 @@
   }
 }
 
-/* Focus states for accessibility */
 .add-buttons button:focus,
 .goal-setter input:focus {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
 
-/* Scrollbar styling for history list */
 .history-list::-webkit-scrollbar {
   width: 6px;
 }
