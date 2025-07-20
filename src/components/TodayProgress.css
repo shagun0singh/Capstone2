@@ -118,6 +118,14 @@
   border: 1px solid var(--border-color);
   transition: all 0.3s ease;
   min-width: 150px;
+  width: 200px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  max-width: 200px;
 }
 
 .stat:hover {
@@ -235,6 +243,9 @@
   .stat {
     padding: 1.5rem;
     min-width: 120px;
+    width: 150px;
+    height: 100px;
+    max-width: 150px;
   }
 }
 

@@ -31,7 +31,6 @@
   /* Color scheme */
   color-scheme: dark;
   color: var(--text-primary);
-  background-color: var(--background-dark);
   
   /* Font rendering */
   font-synthesis: none;
@@ -49,14 +48,10 @@ html {
 }
 
 body {
-  margin: 0;
-  padding: 0;
+  background: #000000;
+  color: var(--text);
+  font-family: var(--font-family);
   min-height: 100vh;
-  background: var(--background-dark);
-  color: var(--text-primary);
-  font-family: inherit;
-  line-height: inherit;
-  overflow-x: hidden;
 }
 
 #root {

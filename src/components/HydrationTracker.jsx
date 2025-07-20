@@ -55,7 +55,7 @@ const HydrationTracker = () => {
   return (
     <div className="hydration-tracker">
       <div className="tracker-header">
-        <h1>Hydration Tracker</h1>
+        <h1>Add Intake</h1>
         <p>Track your daily water intake</p>
       </div>
 

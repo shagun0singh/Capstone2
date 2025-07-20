@@ -11,11 +11,6 @@ const Navigation = () => {
 
   return (
     <nav className="main-nav">
-      <div className="nav-brand">
-        <Link to="/" className="brand-link">
-          <h1>HydrationTracker</h1>
-        </Link>
-      </div>
       <div className="nav-links">
         <Link 
           to="/" 
@@ -39,7 +34,7 @@ const Navigation = () => {
           to="/hydration" 
           className={`nav-link ${isActive('/hydration') ? 'active' : ''}`}
         >
-          Track Water
+          Add Intake
         </Link>
         <Link 
           to="/profile" 

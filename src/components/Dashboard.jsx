@@ -10,27 +10,25 @@ const Dashboard = () => {
         <p>Let's stay hydrated today</p>
       </div>
       
-      <div className="dashboard-content">
-        <div className="quick-actions">
-          <h2>Quick Actions</h2>
-          <div className="action-buttons">
-            <Link to="/today" className="action-btn">
-              <span className="action-icon">📊</span>
-              <span className="action-text">Today's Progress</span>
-            </Link>
-            <Link to="/reminder" className="action-btn">
-              <span className="action-icon">⏰</span>
-              <span className="action-text">Reminder</span>
-            </Link>
-            <Link to="/hydration" className="action-btn">
-              <span className="action-icon">💧</span>
-              <span className="action-text">Track Water</span>
-            </Link>
-            <Link to="/profile" className="action-btn">
-              <span className="action-icon">👤</span>
-              <span className="action-text">View Profile</span>
-            </Link>
-          </div>
+      <div className="quick-actions">
+        <h2>Quick Actions</h2>
+        <div className="action-buttons">
+          <Link to="/today" className="action-btn">
+            <span className="action-icon">📊</span>
+            <span className="action-text">Today's Progress</span>
+          </Link>
+          <Link to="/reminder" className="action-btn">
+            <span className="action-icon">⏰</span>
+            <span className="action-text">Reminder</span>
+          </Link>
+          <Link to="/hydration" className="action-btn">
+            <span className="action-icon">💧</span>
+            <span className="action-text">Add Intake</span>
+          </Link>
+          <Link to="/profile" className="action-btn">
+            <span className="action-icon">👤</span>
+            <span className="action-text">View Profile</span>
+          </Link>
         </div>
       </div>
     </div>

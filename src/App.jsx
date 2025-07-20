@@ -24,6 +24,9 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="app">
+          <div className="page-brand">
+            <h1>HydrationTracker</h1>
+          </div>
           <Navigation />
           <Routes>
             <Route path="/login" element={<Login />} />

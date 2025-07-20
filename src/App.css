@@ -1,6 +1,5 @@
 .app {
   min-height: 100vh;
-  background: var(--background-dark);
   display: flex;
   flex-direction: column;
   width: 100%;
