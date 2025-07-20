@@ -1,5 +1,6 @@
 .hydration-tracker {
-  max-width: 1200px;
+  max-width: 919px;
+  width: 70%;
   margin: 2rem auto;
   padding: 3rem;
   background: var(--background-card);
@@ -80,48 +81,18 @@
   font-size: 1.1rem;
 }
 
-.quick-add {
-  background: var(--background-card);
-  border-radius: 24px;
-  padding: 4rem;
-  box-shadow: var(--shadow-heavy);
-  border: 1px solid var(--border-color);
-  position: relative;
-  overflow: hidden;
-  min-height: 70vh;
-  max-width: 1200px;
-  margin: 3rem auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 
-.quick-add::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-  border-radius: 24px 24px 0 0;
-}
 
-.quick-add h2 {
-  color: var(--text-primary);
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
-  font-weight: 700;
-  text-align: center;
-}
+
 
 .add-buttons {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   justify-content: center;
+  max-width: 800px;
+  margin: 3rem auto;
 }
 
 .add-buttons button {
@@ -218,6 +189,10 @@
   margin: 3rem 0;
 }
 
+.history-section h2 {
+  margin-bottom: 2rem;
+}
+
 .history-section h3 {
   color: var(--text-primary);
   margin-bottom: 1.5rem;
@@ -232,6 +207,7 @@
   max-height: 400px;
   overflow-y: auto;
   border: 1px solid var(--border-color);
+  margin-bottom: 2rem;
 }
 
 .history-item {
@@ -303,6 +279,8 @@
   .hydration-tracker {
     margin: 1rem;
     padding: 2rem;
+    width: 98%;
+    max-width: none;
   }
 
   .tracker-header h1 {
@@ -311,6 +289,7 @@
 
   .add-buttons {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 
   .goal-setter {
@@ -328,7 +307,8 @@
   }
 
   .add-buttons {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
   }
 }
 

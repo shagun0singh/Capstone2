@@ -1,27 +1,83 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Reminder.css';
 
 const Reminder = () => {
-  const [reminders, setReminders] = useState([]);
   const [interval, setInterval] = useState(60);
   const [isActive, setIsActive] = useState(false);
   const [timeLeft, setTimeLeft] = useState(60 * 60); // in seconds
+  const timerRef = useRef(null);
 
-  // Always use a valid interval for display and logic
-  const validInterval = Number(interval) > 0 ? Number(interval) : 60;
+  // Format time left as 'X min Y secs'
+  const formatTimeLeft = (seconds) => {
+    if (!seconds || seconds <= 0) return '0 min 00 secs';
+    const min = Math.floor(seconds / 60);
+    const sec = seconds % 60;
+    return `${min} min ${sec < 10 ? '0' : ''}${sec} secs`;
+  };
 
-  // Set timeLeft only when reminders are started
+  // Handle interval change
+  const handleIntervalChange = (e) => {
+    const value = Number(e.target.value);
+    if (value > 0) {
+      setInterval(value);
+      setTimeLeft(value * 60);
+    }
+  };
+
+  // Handle start reminders
+  const handleStartReminders = () => {
+    setIsActive(true);
+    setTimeLeft(interval * 60);
+  };
+
+  // Handle stop reminders
+  const handleStopReminders = () => {
+    setIsActive(false);
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    setTimeLeft(interval * 60);
+  };
+
+  // Countdown timer effect
   useEffect(() => {
     if (isActive) {
-      setTimeLeft(validInterval * 60);
+      // Clear any existing timer
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+      
+      // Start new timer
+      timerRef.current = setInterval(() => {
+        setTimeLeft(prevTime => {
+          if (prevTime <= 1) {
+            return interval * 60; // Reset to full interval
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
+    } else {
+      // Clear timer when not active
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
     }
-  }, [isActive]);
+
+    // Cleanup on unmount
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, [isActive, interval]); // Removed timeLeft from dependencies
 
   // Notification timer
   useEffect(() => {
-    let timer;
+    let notificationTimer;
     if (isActive) {
-      timer = setInterval(() => {
+      notificationTimer = setInterval(() => {
         if ("Notification" in window) {
           if (Notification.permission === "granted") {
             new Notification("Time to Hydrate!", {
@@ -32,47 +88,10 @@ const Reminder = () => {
             Notification.requestPermission();
           }
         }
-        setTimeLeft(validInterval * 60); // reset countdown after notification
-      }, validInterval * 60 * 1000);
+      }, interval * 60 * 1000);
     }
-    return () => clearInterval(timer);
-  }, [isActive, validInterval]);
-
-  // Countdown timer
-  useEffect(() => {
-    let countdown;
-    if (isActive) {
-      countdown = setInterval(() => {
-        setTimeLeft((prev) => {
-          if (prev > 0) return prev - 1;
-          // When timer hits zero, reset to validInterval * 60
-          return validInterval * 60;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(countdown);
-  }, [isActive, validInterval]);
-
-  // Format time left as 'X min Y secs'
-  const formatTimeLeft = (seconds) => {
-    const min = Math.floor(seconds / 60);
-    const sec = seconds % 60;
-    return `${min} min ${sec < 10 ? '0' : ''}${sec} secs`;
-  };
-
-  const handleStartReminders = () => {
-    setIsActive(true);
-  };
-
-  const handleStopReminders = () => {
-    setIsActive(false);
-    setTimeLeft(validInterval * 60);
-  };
-
-  const handleIntervalChange = (e) => {
-    const value = Number(e.target.value);
-    setInterval(value > 0 ? value : '');
-  };
+    return () => clearInterval(notificationTimer);
+  }, [isActive, interval]);
 
   return (
     <div className="reminder-container">
@@ -109,12 +128,10 @@ const Reminder = () => {
         </div>
         <div className="reminder-status">
           {isActive ? (
-            <>
-              <p className="active-status">
-                Reminders active every {validInterval} minutes<br />
-                Next reminder in {formatTimeLeft(timeLeft)}
-              </p>
-            </>
+            <p className="active-status">
+              Reminders active every {interval} minutes<br />
+              Next reminder in {formatTimeLeft(timeLeft)}
+            </p>
           ) : (
             <p className="inactive-status">Reminders are currently inactive</p>
           )}

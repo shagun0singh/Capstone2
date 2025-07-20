@@ -9,14 +9,38 @@ const Profile = () => {
     dailyGoal: 2000
   });
 
+  // Separate state for editing (changes immediately)
+  const [editingInfo, setEditingInfo] = useState({
+    name: '',
+    weight: 70,
+    dailyGoal: 2000
+  });
+
+  // State for saved data (only updates after save)
+  const [savedUserInfo, setSavedUserInfo] = useState({
+    name: '',
+    weight: 70,
+    dailyGoal: 2000
+  });
+
   const [stats, setStats] = useState({
     totalIntake: 0,
     averageIntake: 0
   });
+
   useEffect(() => {
     const data = getHydrationData();
     if (data) {
-      setUserInfo(data.userData || userInfo);
+      const userData = data.userData || {
+        name: '',
+        weight: 70,
+        dailyGoal: 2000
+      };
+      
+      // Set both editing and saved data to current values
+      setUserInfo(userData);
+      setEditingInfo(userData);
+      setSavedUserInfo(userData);
 
       if (data.weeklyStats?.datasets?.[0]) {
         const totalIntake = data.weeklyStats.datasets[0].data.reduce((sum, amount) => sum + amount, 0);
@@ -30,20 +54,23 @@ const Profile = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUserInfo(prev => ({ ...prev, [name]: value }));
+    setEditingInfo(prev => ({ ...prev, [name]: value }));
   };
-
 
   const saveProfile = () => {
     try {
-      updateUserData(userInfo);
+      updateUserData(editingInfo);
+      // Update saved data after successful save
+      setSavedUserInfo(editingInfo);
+      setUserInfo(editingInfo);
       alert('Profile updated successfully!');
     } catch (error) {
       alert('Error updating profile. Please try again.');
     }
   };
 
-  const recommendedIntake = Math.round(userInfo.weight * 33);
+  // Use savedUserInfo for calculations (only updates after save)
+  const recommendedIntake = Math.round(savedUserInfo.weight * 33);
 
   return (
     <div className="profile-container">
@@ -61,7 +88,7 @@ const Profile = () => {
               <input
                 type="text"
                 name="name"
-                value={userInfo.name}
+                value={editingInfo.name}
                 onChange={handleInputChange}
                 placeholder="Enter your name"
                 className="form-input"
@@ -72,7 +99,7 @@ const Profile = () => {
               <input
                 type="number"
                 name="weight"
-                value={userInfo.weight}
+                value={editingInfo.weight}
                 onChange={handleInputChange}
                 min="20"
                 max="300"
@@ -84,7 +111,7 @@ const Profile = () => {
               <input
                 type="number"
                 name="dailyGoal"
-                value={userInfo.dailyGoal}
+                value={editingInfo.dailyGoal}
                 onChange={handleInputChange}
                 min="500"
                 max="5000"

@@ -57,10 +57,7 @@ const TodayProgress = () => {
           </div>
         </div>
         
-        <Link to="/hydration" className="track-btn">
-          <span className="btn-icon">💧</span>
-          Track Water Intake
-        </Link>
+
       </div>
     </div>
   );

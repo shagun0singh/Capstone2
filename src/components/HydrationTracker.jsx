@@ -72,14 +72,11 @@ const HydrationTracker = () => {
         </div>
       </div>
 
-      <div className="quick-add">
-        <h2>Quick Add</h2>
-        <div className="add-buttons">
-          <button onClick={() => addWater(250)}>250ml</button>
-          <button onClick={() => addWater(500)}>500ml</button>
-          <button onClick={() => addWater(750)}>750ml</button>
-          <button onClick={() => addWater(1000)}>1000ml</button>
-        </div>
+      <div className="add-buttons">
+        <button onClick={() => addWater(250)}>250ml</button>
+        <button onClick={() => addWater(500)}>500ml</button>
+        <button onClick={() => addWater(750)}>750ml</button>
+        <button onClick={() => addWater(1000)}>1000ml</button>
       </div>
 
       <div className="history-section">
