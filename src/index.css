@@ -48,8 +48,8 @@ html {
 }
 
 body {
-  background: url('/dashboard-bg.png') no-repeat right -72px bottom -30px fixed;
-  background-size: 400px auto;
+  background: url('/dashboard-bg.gif') no-repeat right -10px bottom -30px fixed;
+  background-size: 250px auto;
   background-blend-mode: lighten;
 }
 
