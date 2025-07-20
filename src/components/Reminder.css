@@ -259,10 +259,92 @@
 
   .reminder-content {
     padding: 1.5rem;
+    min-height: 50vh;
   }
 
   .interval-selector input {
     max-width: 100%;
+  }
+  
+  .reminder-header p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 412px) {
+  .reminder-container {
+    padding: 0.75rem;
+  }
+  
+  .reminder-header h1 {
+    font-size: 1.7rem;
+  }
+  
+  .reminder-content {
+    padding: 1.3rem;
+    min-height: 47vh;
+  }
+  
+  .reminder-header p {
+    font-size: 0.95rem;
+  }
+  
+  .interval-selector input {
+    padding: 0.9rem;
+    font-size: 0.95rem;
+  }
+  
+  .start-btn, .stop-btn {
+    padding: 0.9rem 1.3rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .reminder-container {
+    padding: 0.5rem;
+  }
+  
+  .reminder-header h1 {
+    font-size: 1.6rem;
+  }
+  
+  .reminder-content {
+    padding: 1.5rem;
+    min-height: 45vh;
+  }
+  
+  .reminder-header p {
+    font-size: 0.9rem;
+  }
+  
+  .interval-selector input {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
+  .start-btn, .stop-btn {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .reminder-container {
+    padding: 0.5rem;
+  }
+  
+  .reminder-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .reminder-content {
+    padding: 1rem;
+    min-height: 40vh;
+  }
+  
+  .reminder-header p {
+    font-size: 0.8rem;
   }
 }
 

@@ -39,6 +39,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Force refresh for responsive styles */
 * {
   box-sizing: border-box;
 }
@@ -47,10 +48,16 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Ensure viewport meta tag is respected */
 body {
+  margin: 0;
+  padding: 0;
   background: url('/dashboard-bg.gif') no-repeat right -10px bottom -30px fixed;
   background-size: 250px auto;
   background-blend-mode: lighten;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 #root {
@@ -161,5 +168,74 @@ select:focus {
 @media (max-width: 768px) {
   .container {
     padding: 0 0.5rem;
+  }
+  
+  body {
+    background: url('/dashboard-bg.gif') no-repeat right -50px bottom -20px fixed;
+    background-size: 180px auto;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    background: url('/dashboard-bg.gif') no-repeat right -30px bottom -15px fixed;
+    background-size: 120px auto;
+  }
+  
+  h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  
+  h2 {
+    font-size: clamp(1.25rem, 3vw, 1.8rem);
+  }
+  
+  h3 {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+  }
+}
+
+@media (max-width: 412px) {
+  body {
+    background: url('/dashboard-bg.gif') no-repeat right -25px bottom -12px fixed;
+    background-size: 110px auto;
+  }
+  
+  h1 {
+    font-size: clamp(1.4rem, 3.8vw, 2.2rem);
+  }
+  
+  h2 {
+    font-size: clamp(1.2rem, 2.8vw, 1.7rem);
+  }
+  
+  h3 {
+    font-size: clamp(0.95rem, 2.3vw, 1.4rem);
+  }
+}
+
+@media (max-width: 375px) {
+  body {
+    background: url('/dashboard-bg.gif') no-repeat right -20px bottom -10px fixed;
+    background-size: 100px auto;
+  }
+  
+  h1 {
+    font-size: clamp(1.3rem, 3.5vw, 2rem);
+  }
+  
+  h2 {
+    font-size: clamp(1.1rem, 2.8vw, 1.6rem);
+  }
+  
+  h3 {
+    font-size: clamp(0.9rem, 2.2vw, 1.3rem);
+  }
+}
+
+@media (max-width: 320px) {
+  body {
+    background: url('/dashboard-bg.gif') no-repeat right -15px bottom -8px fixed;
+    background-size: 80px auto;
   }
 }

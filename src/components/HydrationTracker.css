@@ -295,11 +295,25 @@
   .goal-setter {
     flex-direction: column;
   }
+  
+  .time-greeting {
+    font-size: 1rem;
+  }
+  
+  .progress-bar {
+    height: 25px;
+  }
+  
+  .progress-text {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
   .hydration-tracker {
     padding: 1.5rem;
+    margin: 0.5rem;
+    width: 100%;
   }
 
   .tracker-header h1 {
@@ -309,6 +323,148 @@
   .add-buttons {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.8rem;
+  }
+  
+  .add-buttons button {
+    padding: 1.2rem;
+  }
+  
+  .time-greeting {
+    font-size: 0.9rem;
+  }
+  
+  .progress-bar {
+    height: 20px;
+  }
+  
+  .progress-text {
+    font-size: 0.9rem;
+  }
+  
+  .chart-container {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 412px) {
+  .hydration-tracker {
+    padding: 1.2rem;
+    margin: 0.3rem;
+    width: 100%;
+  }
+  
+  .tracker-header h1 {
+    font-size: 1.7rem;
+  }
+  
+  .time-greeting {
+    font-size: 0.85rem;
+  }
+  
+  .add-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+  
+  .add-buttons button {
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+  
+  .progress-bar {
+    height: 18px;
+  }
+  
+  .progress-text {
+    font-size: 0.85rem;
+  }
+  
+  .chart-container {
+    padding: 1.2rem;
+  }
+  
+  .goal-setter input {
+    padding: 0.7rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .hydration-tracker {
+    padding: 1rem;
+    margin: 0.25rem;
+    width: 100%;
+  }
+  
+  .tracker-header h1 {
+    font-size: 1.6rem;
+  }
+  
+  .time-greeting {
+    font-size: 0.9rem;
+  }
+  
+  .add-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .add-buttons button {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .progress-bar {
+    height: 18px;
+  }
+  
+  .progress-text {
+    font-size: 0.9rem;
+  }
+  
+  .chart-container {
+    padding: 1rem;
+  }
+  
+  .goal-setter input {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .hydration-tracker {
+    padding: 1rem;
+    margin: 0.25rem;
+  }
+  
+  .tracker-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .add-buttons {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .add-buttons button {
+    padding: 1rem;
+  }
+  
+  .time-greeting {
+    font-size: 0.8rem;
+  }
+  
+  .progress-bar {
+    height: 16px;
+  }
+  
+  .progress-text {
+    font-size: 0.8rem;
+  }
+  
+  .chart-container {
+    padding: 1rem;
   }
 }
 
