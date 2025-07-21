@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { updateUserData } from '../utils/hydrationData';
 
 const CompleteProfile = () => {
   const [form, setForm] = useState({
@@ -16,8 +17,25 @@ const CompleteProfile = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const calculateRecommendedIntake = (weight, gender, activity) => {
+    // Simple formula: 35ml per kg, + extra for activity, + extra for male
+    let base = weight * 35; // 35ml per kg
+    if (activity === 'High') base += 400;
+    else if (activity === 'Moderate') base += 200;
+    if (gender === 'Male') base += 250;
+    return Math.round(base / 50) * 50; // round to nearest 50ml
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const weight = parseInt(form.weight, 10) || 0;
+    const recommendedIntake = calculateRecommendedIntake(weight, form.gender, form.activity) || 2000;
+    const userData = {
+      ...form,
+      recommendedIntake,
+      dailyGoal: recommendedIntake // default to recommended
+    };
+    updateUserData(userData);
     navigate('/');
   };
 

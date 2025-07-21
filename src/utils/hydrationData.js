@@ -71,19 +71,26 @@ export const updateWaterIntake = (amount) => {
 };
 
 export const getHydrationData = () => {
+  const userData = JSON.parse(localStorage.getItem(STORAGE_KEYS.USER_DATA) || '{"name":"John Doe","weight":70,"dailyGoal":2000}');
+  const recommended = userData.recommendedIntake || 2000;
+  const goal = parseInt(localStorage.getItem(STORAGE_KEYS.HYDRATION_GOAL)) || recommended || 2000;
   return {
     todayIntake: parseInt(localStorage.getItem(STORAGE_KEYS.TODAY_INTAKE) || '0'),
-    goal: parseInt(localStorage.getItem(STORAGE_KEYS.HYDRATION_GOAL) || '2000'),
+    goal: goal,
     streak: parseInt(localStorage.getItem(STORAGE_KEYS.STREAK) || '0'),
     weeklyStats: JSON.parse(localStorage.getItem(STORAGE_KEYS.WEEKLY_STATS) || '{"labels":["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],"datasets":[{"data":[0,0,0,0,0,0,0]}]}'),
-    userData: JSON.parse(localStorage.getItem(STORAGE_KEYS.USER_DATA) || '{"name":"John Doe","weight":70,"dailyGoal":2000}'),
+    userData: userData,
     history: JSON.parse(localStorage.getItem(STORAGE_KEYS.TODAY_HISTORY) || '[]')
   };
 };
 
 export const updateUserData = (userData) => {
   localStorage.setItem(STORAGE_KEYS.USER_DATA, JSON.stringify(userData));
-  localStorage.setItem(STORAGE_KEYS.HYDRATION_GOAL, userData.dailyGoal.toString());
+  if (userData.recommendedIntake) {
+    localStorage.setItem(STORAGE_KEYS.HYDRATION_GOAL, userData.recommendedIntake.toString());
+  } else {
+    localStorage.setItem(STORAGE_KEYS.HYDRATION_GOAL, userData.dailyGoal ? userData.dailyGoal.toString() : '2000');
+  }
 };
 
 export const resetDailyIntake = () => {

@@ -1,15 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Profile.css';
+import { updateUserData } from '../utils/hydrationData';
 
 const Profile = () => {
   const [showModal, setShowModal] = useState(false);
   const [userInfo, setUserInfo] = useState({ name: 'User' }); 
   const [editingInfo, setEditingInfo] = useState({});
 
-  const handleEdit = () => setShowModal(true);
+  useEffect(() => {
+    // Load user info from localStorage if available
+    const stored = localStorage.getItem('userData');
+    if (stored) {
+      setUserInfo(JSON.parse(stored));
+    }
+  }, []);
+
+  const handleEdit = () => {
+    setEditingInfo(userInfo);
+    setShowModal(true);
+  };
   const handleClose = () => setShowModal(false);
+
+  const calculateRecommendedIntake = (weight, gender, activity) => {
+    let base = weight * 35;
+    if (activity === 'High') base += 400;
+    else if (activity === 'Moderate') base += 200;
+    if (gender === 'Male') base += 250;
+    return Math.round(base / 50) * 50;
+  };
+
   const handleSave = (updatedInfo) => {
-    setUserInfo(updatedInfo);
+    // Calculate new recommended intake
+    const weight = parseInt(updatedInfo.weight, 10) || 0;
+    const recommendedIntake = calculateRecommendedIntake(weight, updatedInfo.gender, updatedInfo.activity) || 2000;
+    const userData = {
+      ...updatedInfo,
+      recommendedIntake,
+      dailyGoal: recommendedIntake
+    };
+    setUserInfo(userData);
+    updateUserData(userData);
     setShowModal(false);
   };
 
@@ -28,7 +58,7 @@ const Profile = () => {
           <div className="stat-item">
             <div className="stat-icon">🎯</div>
             <h3>Recommended Intake</h3>
-            <p className="stat-value">2.5 liters/day</p>
+            <p className="stat-value">{userInfo.recommendedIntake ? (userInfo.recommendedIntake / 1000).toFixed(2) : '2.00'} liters/day</p>
             <p className="stat-label">Based on your weight</p>
           </div>
           <div className="stat-item">
