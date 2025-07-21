@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { updateUserData } from '../utils/hydrationData';
+import { fetchRecommendedIntake } from '../utils/nutritionixApi';
 
 const CompleteProfile = () => {
   const [form, setForm] = useState({
@@ -17,26 +18,26 @@ const CompleteProfile = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const calculateRecommendedIntake = (weight, gender, activity) => {
-    // Simple formula: 35ml per kg, + extra for activity, + extra for male
-    let base = weight * 35; // 35ml per kg
-    if (activity === 'High') base += 400;
-    else if (activity === 'Moderate') base += 200;
-    if (gender === 'Male') base += 250;
-    return Math.round(base / 50) * 50; // round to nearest 50ml
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const weight = parseInt(form.weight, 10) || 0;
-    const recommendedIntake = calculateRecommendedIntake(weight, form.gender, form.activity) || 2000;
-    const userData = {
-      ...form,
-      recommendedIntake,
-      dailyGoal: recommendedIntake // default to recommended
-    };
-    updateUserData(userData);
-    navigate('/');
+    let recommendedIntake = 2000;
+    try {
+      recommendedIntake = await fetchRecommendedIntake({
+        age: form.age,
+        gender: form.gender,
+        weight: form.weight,
+        height: form.height
+      });
+    } catch (e) {
+      // fallback to local formula if API fails
+      let base = form.weight * 35;
+      if (form.activity === 'High') base += 400;
+      else if (form.activity === 'Moderate') base += 200;
+      if (form.gender === 'Male') base += 250;
+      recommendedIntake = Math.round(base / 50) * 50;
+    }
+    updateUserData({ ...form, recommendedIntake, dailyGoal: recommendedIntake });
+    navigate('/profile');
   };
 
   return (

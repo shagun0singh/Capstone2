@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Profile.css';
 import { updateUserData } from '../utils/hydrationData';
+import { fetchRecommendedIntake } from '../utils/nutritionixApi';
 
 const Profile = () => {
   const [showModal, setShowModal] = useState(false);
@@ -29,17 +30,25 @@ const Profile = () => {
     return Math.round(base / 50) * 50;
   };
 
-  const handleSave = (updatedInfo) => {
-    // Calculate new recommended intake
-    const weight = parseInt(updatedInfo.weight, 10) || 0;
-    const recommendedIntake = calculateRecommendedIntake(weight, updatedInfo.gender, updatedInfo.activity) || 2000;
-    const userData = {
-      ...updatedInfo,
-      recommendedIntake,
-      dailyGoal: recommendedIntake
-    };
-    setUserInfo(userData);
-    updateUserData(userData);
+  const handleSave = async () => {
+    let recommendedIntake = 2000;
+    try {
+      recommendedIntake = await fetchRecommendedIntake({
+        age: editingInfo.age,
+        gender: editingInfo.gender,
+        weight: editingInfo.weight,
+        height: editingInfo.height
+      });
+    } catch (e) {
+      let base = editingInfo.weight * 35;
+      if (editingInfo.activity === 'High') base += 400;
+      else if (editingInfo.activity === 'Moderate') base += 200;
+      if (editingInfo.gender === 'Male') base += 250;
+      recommendedIntake = Math.round(base / 50) * 50;
+    }
+    const updated = { ...editingInfo, recommendedIntake, dailyGoal: recommendedIntake };
+    setUserInfo(updated);
+    updateUserData(updated);
     setShowModal(false);
   };
 
@@ -81,7 +90,7 @@ const Profile = () => {
             <form
               onSubmit={e => {
                 e.preventDefault();
-                handleSave(editingInfo);
+                handleSave();
               }}
               className="info-form"
             >
